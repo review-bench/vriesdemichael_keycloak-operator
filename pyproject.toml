@@ -106,8 +106,8 @@ timeout = 900
 
 [dependency-groups]
 quality = [
-    "ruff>=0.15.14",
-    "ty>=0.0.39",
+    "ruff>=0.15.15",
+    "ty>=0.0.40",
     "types-requests>=2.33.0.20260518",
     "pre-commit>=4.6.0",
 ]
@@ -123,7 +123,7 @@ docs = [
 ]
 test = [
     "pytest>=8.4.2",
-    "pytest-asyncio>=1.2.0",
+    "pytest-asyncio>=1.4.0",
     "pytest-timeout>=2.3.1",
     "pytest-xdist>=3.5.0",
     "pyyaml>=6.0.0",
@@ -134,10 +134,10 @@ test = [
 ]
 security = [
     "pip-audit>=2.7.0",
-    "safety>=3.0.0",
+    "safety>=3.8.1",
     "authlib>=1.7.2",      # CVE-2025-68158
     "marshmallow>=4.1.2",  # CVE-2025-68480
-    "pip>=26.1.1",           # CVE-2025-8869
+    "pip>=26.1.2",           # CVE-2025-8869
 ]
 dev = [
     { include-group = "quality" },
