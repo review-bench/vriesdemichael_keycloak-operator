@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Determine build parameters
         id: params
@@ -75,7 +75,7 @@ jobs:
           echo "Building ${IMAGE_VARIANT} image for Keycloak ${VERSION} (tracing=${TRACING}, upload_sarif=${UPLOAD_SARIF})"
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4.1.0
+        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
 
       - name: Resolve Keycloak base image digest
         id: base-image
@@ -90,7 +90,7 @@ jobs:
           echo "digest=${BASE_DIGEST}" >> $GITHUB_OUTPUT
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
+        uses: docker/login-action@06fb636fac595d6fb4b28a5dfcb21a6f5091859c # v4.5.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -131,7 +131,7 @@ jobs:
 
       - name: Build and push optimized Keycloak image
         if: steps.check.outputs.exists == 'false'
-        uses: docker/build-push-action@f9f3042f7e2789586610d6e8b85c8f03e5195baf # v7.2.0
+        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: images/keycloak-optimized
           file: images/keycloak-optimized/Dockerfile
@@ -165,7 +165,7 @@ jobs:
 
       - name: Upload Trivy results to GitHub Security
         if: steps.check.outputs.exists == 'false' && steps.params.outputs.upload_sarif == 'true'
-        uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+        uses: github/codeql-action/upload-sarif@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         with:
           sarif_file: 'trivy-keycloak-optimized.sarif'
           category: 'test/${{ steps.params.outputs.image_variant }}'
